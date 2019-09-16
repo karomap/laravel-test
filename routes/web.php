@@ -18,3 +18,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('user', 'UserController', ['except' => ['index', 'create', 'store']]);
+});
+
+Route::group([
+    'prefix' => 'admin',
+    'middleware' => ['has_access_level:admin'],
+    'namespace' => 'Admin'
+], function () {
+    Route::resource('user', 'UserController', ['names' => 'admin.user']);
+});

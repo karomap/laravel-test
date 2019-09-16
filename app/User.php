@@ -44,4 +44,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * ==================================================
+     * METHODS
+     * ==================================================
+     */
+
+    /**
+     * Check user access level
+     *
+     * @param string $level
+     * @return boolean
+     */
+    public function hasAccessLevel($level)
+    {
+        if ($this->role === UserRole::ADMIN || $level === UserRole::USER) {
+            return true;
+        }
+
+        return $this->role === $level;
+    }
 }

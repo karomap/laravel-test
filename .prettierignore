@@ -1,0 +1,12 @@
+*.php
+
+*.jpg
+*.jpeg
+*.png
+*.svg
+*.gif
+
+*.ttf
+*.otf
+*.woff
+*.woff2

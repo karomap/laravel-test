@@ -1,4 +1,11 @@
 {
+  "name": "karomap-laravel-test",
+  "version": "1.0.0",
+  "author": {
+    "name": "Karomap Semesta",
+    "email": "admin@karomap.com"
+  },
+  "license": "UNLICENSED",
   "private": true,
   "scripts": {
     "dev": "npm run development",
@@ -20,6 +27,7 @@
     "resolve-url-loader": "^2.3.1",
     "sass": "^1.15.2",
     "sass-loader": "^7.1.0",
+    "typeface-nunito": "^0.0.72",
     "vue-template-compiler": "^2.6.10"
   }
 }
