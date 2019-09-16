@@ -2,9 +2,17 @@
 
 namespace App;
 
+use App\Helpers\BaseEnum;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
+abstract class UserRole extends BaseEnum
+{
+    const ADMIN = 'admin';
+    const OPERATOR = 'operator';
+    const USER = 'user';
+}
 
 class User extends Authenticatable
 {
@@ -16,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role',
     ];
 
     /**
