@@ -9,6 +9,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class GeneralTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * Test welcome page
      *
@@ -33,8 +35,7 @@ class GeneralTest extends TestCase
     public function testHomePage()
     {
         $this->get('/home')
-            ->assertStatus(302)
-            ->assertLocation('/login');
+            ->assertRedirect('/login');
 
         $user = User::firstOrCreate(
             factory(User::class)->make()->getAttributes()
@@ -44,5 +45,49 @@ class GeneralTest extends TestCase
             ->get('/home')
             ->assertStatus(200)
             ->assertSee('You are logged in!');
+    }
+
+    /**
+     * Test login
+     *
+     * @group general
+     * @return void
+     */
+    public function testLogin()
+    {
+        $user = factory(User::class)->make();
+        User::whereEmail($user->email)->forceDelete();
+        $user->password = \Hash::make('secret');
+        $user->save();
+
+        $formData = [
+            'email' => $user->email,
+            'password' => 'secret'
+        ];
+
+        $this->post('/login', $formData)
+            ->assertRedirect('/home');
+    }
+
+    /**
+     * Test register
+     *
+     * @group general
+     * @return void
+     */
+    public function testRegister()
+    {
+        $user = factory(User::class)->make();
+        User::whereEmail($user->email)->forceDelete();
+
+        $formData = [
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => 'secret123',
+            'password_confirmation' => 'secret123'
+        ];
+
+        $this->post('/register', $formData)
+            ->assertRedirect('/home');
     }
 }

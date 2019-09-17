@@ -6,10 +6,19 @@ Test for laravel developer
 
 ## Requirements
 
-- PHP >= 7.2
-- Composer PHP package manager
-- MySQL
-- Node.js
+- PHP >= 7.2 with the following extensions enabled:
+  - bcmath
+  - ctype
+  - json
+  - mbstring
+  - openssl
+  - PDO
+  - pdo_sqlite
+  - Phar
+  - tokenizer
+  - xml
+- [Composer](https://getcomposer.org/)
+- [Node.js](https://nodejs.org/en/)
 
 
 
@@ -34,7 +43,19 @@ Test for laravel developer
   $ npm install
   ```
 
-- Copy `.env.example` to `.env` and change database configuration according to your local environment then create the database
+- Copy `.env.local` to `.env`
+  ```bash
+  $ cp .env.local .env
+  ```
+  
+- Create database file
+  ```bash
+  # Application database
+  $ touch database/database.sqlite
+
+  # Testing database
+  $ touch database/database-testing.sqlite
+  ```
   
 - Generate new application key
   ```bash

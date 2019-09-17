@@ -1,0 +1,16 @@
+language: php
+
+php:
+  - 7.3
+
+notifications:
+  email: false
+
+install:
+  - cp .env.testing .env
+  - touch database/database-testing.sqlite
+  - travis_retry composer install --no-interaction --prefer-dist --no-suggest
+  - php artisan key:generate
+
+script:
+  - phpunit -v

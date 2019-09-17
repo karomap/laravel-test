@@ -20,13 +20,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('user', 'UserController', ['except' => ['index', 'create', 'store']]);
+    Route::resource('user', 'UserController')->except('index', 'create', 'store');
 });
 
 Route::group([
     'prefix' => 'admin',
     'middleware' => ['has_access_level:admin'],
-    'namespace' => 'Admin'
+    'namespace' => 'Admin',
+    'as' => 'admin.',
 ], function () {
-    Route::resource('user', 'UserController', ['names' => 'admin.user']);
+    Route::resource('user', 'UserController');
 });

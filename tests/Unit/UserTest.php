@@ -12,6 +12,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class UserTest extends TestCase
 {
     use WithFaker;
+    use RefreshDatabase;
 
     /**
      * Setup the test environment.
@@ -23,7 +24,7 @@ class UserTest extends TestCase
         parent::setUp();
 
         // Seed users table
-        $userCount = User::where('role', UserRole::USER)->count();
+        $userCount = User::whereRole(UserRole::USER)->count();
         if ($userCount < 10) {
             factory(User::class, 10)->create();
         }
@@ -36,7 +37,7 @@ class UserTest extends TestCase
      */
     public function testIndex()
     {
-        $this->assertTrue(User::where('role', UserRole::USER)->count() >= 10);
+        $this->assertTrue(User::whereRole(UserRole::USER)->count() >= 10);
 
         $users = User::all();
         $this->assertInstanceOf(Collection::class, $users);
@@ -53,7 +54,7 @@ class UserTest extends TestCase
     public function testCreate()
     {
         $email = 'test_user_email@localhost';
-        User::where('email', $email)->forceDelete();
+        User::whereEmail($email)->forceDelete();
 
         $prevUserCount = User::count();
 
