@@ -5,14 +5,14 @@ namespace Tests\Unit;
 use App\User;
 use App\UserRole;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase
 {
+    use DatabaseMigrations;
     use WithFaker;
-    use RefreshDatabase;
 
     /**
      * Setup the test environment.
@@ -68,5 +68,35 @@ class UserTest extends TestCase
 
         $this->assertInstanceOf(User::class, $user);
         $this->assertTrue(User::count() === ($prevUserCount + 1));
+    }
+
+    /**
+     * Test update
+     *
+     * @group user
+     *
+     * @return void
+     */
+    public function testUpdate()
+    {
+        $user = User::firstOrFail();
+        $user->name = 'Test Update';
+        $user->save();
+
+        $this->assertTrue(User::whereName('Test Update')->exists());
+    }
+
+    /**
+     * Test delete
+     *
+     * @group user
+     * @return void
+     */
+    public function testDelete()
+    {
+        $user = User::firstOrFail();
+        $user->forceDelete();
+
+        $this->assertFalse(User::whereEmail($user->email)->exists());
     }
 }
