@@ -29,6 +29,7 @@ class UserTest extends TestCase
             factory(User::class, 10)->create();
         }
     }
+
     /**
      * Test index users.
      *

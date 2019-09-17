@@ -48,13 +48,13 @@ class User extends Authenticatable
     /**
      * ==================================================
      * METHODS
-     * ==================================================
+     * ==================================================.
      */
 
     /**
-     * Check user access level
+     * Check user access level.
      *
-     * @param string $level
+     * @param  string $level
      * @return bool
      */
     public function hasAccessLevel($level)
@@ -69,8 +69,7 @@ class User extends Authenticatable
     /**
      * Send the password reset notification.
      *
-     * @param  string  $token
-     * @return void
+     * @param string $token
      */
     public function sendPasswordResetNotification($token)
     {

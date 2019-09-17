@@ -22,6 +22,7 @@ abstract class BaseEnum
         if (!isset(static::$constants[$class])) {
             static::$constants[$class] = (new \ReflectionClass(get_called_class()))->getConstants();
         }
+
         return static::$constants[$class];
     }
 }

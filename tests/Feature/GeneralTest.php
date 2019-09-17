@@ -61,7 +61,7 @@ class GeneralTest extends TestCase
 
         $formData = [
             'email' => $user->email,
-            'password' => 'password'
+            'password' => 'password',
         ];
 
         $this->post(route('login', app()->getLocale()), $formData)
@@ -83,7 +83,7 @@ class GeneralTest extends TestCase
             'name' => $user->name,
             'email' => $user->email,
             'password' => 'password',
-            'password_confirmation' => 'password'
+            'password_confirmation' => 'password',
         ];
 
         $this->post(route('register', app()->getLocale()), $formData)

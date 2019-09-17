@@ -49,7 +49,7 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role' => ['required', 'in:' . implode(',', array_values(UserRole::getConstants()))],
+            'role' => ['required', 'in:'.implode(',', array_values(UserRole::getConstants()))],
         ]);
 
         $user = User::create([
@@ -67,8 +67,8 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  string  $locale
-     * @param  \App\User  $user
+     * @param  string                    $locale
+     * @param  \App\User                 $user
      * @return \Illuminate\Http\Response
      */
     public function edit($locale, User $user)
@@ -76,7 +76,7 @@ class UserController extends Controller
         return view('user.edit', [
             'title' => \Lang::get('Edit User'),
             'action' => route('admin.user.update', [$locale, $user]),
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
@@ -84,17 +84,17 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  string  $locale
-     * @param  \App\User  $user
+     * @param  string                    $locale
+     * @param  \App\User                 $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $locale, User $user)
     {
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
-            'role' => ['required', 'in:' . implode(',', array_values(UserRole::getConstants()))],
+            'role' => ['required', 'in:'.implode(',', array_values(UserRole::getConstants()))],
         ]);
 
         $attributes = $request->only('name', 'email', 'role');
@@ -112,8 +112,8 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  string  $locale
-     * @param  \App\User  $user
+     * @param  string                    $locale
+     * @param  \App\User                 $user
      * @return \Illuminate\Http\Response
      */
     public function destroy($locale, User $user)

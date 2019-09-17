@@ -1,6 +1,7 @@
 <?php
 
 namespace Illuminate\Foundation\Testing {
-    class TestResponse extends \Illuminate\Http\Response
-    { }
+    class _ide_helper_extra extends \Illuminate\Http\Response
+    {
+    }
 }
