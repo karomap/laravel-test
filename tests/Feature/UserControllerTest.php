@@ -59,7 +59,7 @@ class UserControllerTest extends TestCase
 
         $formData = [
             'name' => 'User Test',
-            'email' => 'user_test@localhost'
+            'email' => 'user_test@localhost',
         ];
 
         $this->actingAs($user)

@@ -11,7 +11,7 @@ class GeneralTest extends TestCase
     use DatabaseMigrations;
 
     /**
-     * Test welcome page
+     * Test welcome page.
      *
      * @group general
      * @return void
@@ -26,7 +26,7 @@ class GeneralTest extends TestCase
     }
 
     /**
-     * Test home page
+     * Test home page.
      *
      * @group general
      * @return void
@@ -47,7 +47,7 @@ class GeneralTest extends TestCase
     }
 
     /**
-     * Test login
+     * Test login.
      *
      * @group general
      * @return void
@@ -69,7 +69,7 @@ class GeneralTest extends TestCase
     }
 
     /**
-     * Test register
+     * Test register.
      *
      * @group general
      * @return void

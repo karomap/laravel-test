@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -190,4 +190,4 @@ return array(
     */
     'include_class_docblocks' => false,
 
-);
+];

@@ -14,7 +14,7 @@
 Route::group([
     'prefix' => '{locale}',
     'where' => ['locale' => '[a-zA-Z]{2}'],
-    'middleware' => 'setlocale'
+    'middleware' => 'setlocale',
 ], function () {
     Route::get('/', function () {
         return view('welcome');

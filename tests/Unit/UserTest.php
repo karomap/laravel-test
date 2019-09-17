@@ -6,8 +6,8 @@ use App\User;
 use App\UserRole;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
 
 class UserTest extends TestCase
 {
@@ -30,7 +30,7 @@ class UserTest extends TestCase
         }
     }
     /**
-     * Test index users
+     * Test index users.
      *
      * @group user
      * @return void
@@ -46,7 +46,7 @@ class UserTest extends TestCase
     }
 
     /**
-     * Test create user
+     * Test create user.
      *
      * @group user
      * @return void
@@ -63,7 +63,7 @@ class UserTest extends TestCase
             'email' => $email,
             'email_verified_at' => now(),
             'password' => \Hash::make('password'),
-            'role' => UserRole::USER
+            'role' => UserRole::USER,
         ]);
 
         $this->assertInstanceOf(User::class, $user);
@@ -71,7 +71,7 @@ class UserTest extends TestCase
     }
 
     /**
-     * Test update
+     * Test update.
      *
      * @group user
      *
@@ -87,7 +87,7 @@ class UserTest extends TestCase
     }
 
     /**
-     * Test delete
+     * Test delete.
      *
      * @group user
      * @return void

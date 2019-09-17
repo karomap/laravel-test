@@ -5,14 +5,14 @@ namespace App\Helpers;
 abstract class BaseEnum
 {
     /**
-     * Constant storage
+     * Constant storage.
      *
      * @var array
      */
     protected static $constants = [];
 
     /**
-     * Get enum properties
+     * Get enum constants.
      *
      * @return array
      */

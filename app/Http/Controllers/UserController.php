@@ -45,7 +45,7 @@ class UserController extends Controller
         return view('user.edit', [
             'title' => \Lang::get('Edit Profile'),
             'action' => route('user.update', app()->getLocale()),
-            'user' => $this->user()
+            'user' => $this->user(),
         ]);
     }
 

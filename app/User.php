@@ -55,7 +55,7 @@ class User extends Authenticatable
      * Check user access level
      *
      * @param string $level
-     * @return boolean
+     * @return bool
      */
     public function hasAccessLevel($level)
     {
