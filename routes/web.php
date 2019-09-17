@@ -35,7 +35,7 @@ Route::group([
             'namespace' => 'Admin',
             'as' => 'admin.',
         ], function () {
-            Route::resource('user', 'UserController');
+            Route::resource('user', 'UserController')->except('show');
         });
     });
 });

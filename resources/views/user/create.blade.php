@@ -6,12 +6,11 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">{{ $title }}</h4>
+                    <h4 class="card-title">{{ __('Create New User') }}</h4>
 
                     <div class="card-text">
-                        <form method="POST" action="{{ $action }}">
+                        <form method="POST" action="{{ route('admin.user.store', app()->getLocale()) }}">
                             @csrf
-                            {{ method_field('PATCH') }}
 
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
@@ -19,7 +18,7 @@
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ old('name') ?: $user->name }}" required autocomplete="name" autofocus>
+                                        value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -36,7 +35,7 @@
                                 <div class="col-md-6">
                                     <input id="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') ?: $user->email }}" required autocomplete="email">
+                                        value="{{ old('email') }}" required autocomplete="email">
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -73,21 +72,17 @@
                                 </div>
                             </div>
 
-                            @if(Auth::user()->hasAccessLevel('admin') && Auth::user()->id !== $user->id)
                             <div class="form-group row">
                                 <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                                 <div class="col-md-6">
-                                    <select name="role" id="role" class="custom-select">
+                                    <select name="role" id="role" class="custom-select" value="{{ old('role') }}">
                                         @foreach (App\UserRole::getConstants() as $key => $role)
-                                        <option value="{{ $role }}"
-                                            {{ (old('role') ?: $user->role) === $role ? 'selected' : '' }}>{{ $key }}
-                                        </option>
+                                        <option value="{{ $role }}">{{ $key }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            @endif
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">

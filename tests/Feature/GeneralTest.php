@@ -21,8 +21,8 @@ class GeneralTest extends TestCase
         $this->get(route('welcome', app()->getLocale()))
             ->assertOk()
             ->assertSee(\Config::get('app.name'))
-            ->assertSee(__('Login'))
-            ->assertSee(__('Register'));
+            ->assertSee(\Lang::get('Login'))
+            ->assertSee(\Lang::get('Register'));
     }
 
     /**

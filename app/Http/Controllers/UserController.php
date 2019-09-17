@@ -22,8 +22,7 @@ class UserController extends Controller
      */
     protected function user()
     {
-        $user = \Auth::user();
-        return $user->refresh();
+        return \Auth::user()->refresh();
     }
 
     /**
@@ -33,7 +32,7 @@ class UserController extends Controller
      */
     public function show()
     {
-        return view('user.show', ['user' => $this->user()]);
+        return view('user.show', ['title' => \Lang::get('Profile'), 'user' => $this->user()]);
     }
 
     /**
@@ -43,7 +42,11 @@ class UserController extends Controller
      */
     public function edit()
     {
-        return view('user.edit', ['user' => $this->user()]);
+        return view('user.edit', [
+            'title' => \Lang::get('Edit Profile'),
+            'action' => route('user.update', app()->getLocale()),
+            'user' => $this->user()
+        ]);
     }
 
     /**
@@ -69,7 +72,7 @@ class UserController extends Controller
         }
 
         $user = $user->update($attributes);
-        $request->session()->flash('status', 'Profile updated!');
+        session()->flash('status', 'Profile updated!');
 
         return redirect()->route('user.show', app()->getLocale());
     }
