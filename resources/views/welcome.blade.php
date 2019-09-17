@@ -14,12 +14,12 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ route('home', app()->getLocale()) }}">{{ __('Home') }}</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('login', app()->getLocale()) }}">{{ __('Login') }}</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('register', app()->getLocale()) }}">{{ __('Register') }}</a>
                         @endif
                     @endauth
                 </div>

@@ -62,7 +62,7 @@ class UserTest extends TestCase
             'name' => $this->faker->name,
             'email' => $email,
             'email_verified_at' => now(),
-            'password' => \Hash::make('secret'),
+            'password' => \Hash::make('password'),
             'role' => UserRole::USER
         ]);
 

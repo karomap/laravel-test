@@ -11,23 +11,35 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::resource('user', 'UserController')->except('index', 'create', 'store');
-});
-
 Route::group([
-    'prefix' => 'admin',
-    'middleware' => ['has_access_level:admin'],
-    'namespace' => 'Admin',
-    'as' => 'admin.',
+    'prefix' => '{locale}',
+    'where' => ['locale' => '[a-zA-Z]{2}'],
+    'middleware' => 'setlocale'
 ], function () {
-    Route::resource('user', 'UserController');
+    Route::get('/', function () {
+        return view('welcome');
+    })->name('welcome');
+
+    Auth::routes();
+
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('profile', 'UserController@show')->name('user.show');
+        Route::get('profile/edit', 'UserController@edit')->name('user.edit');
+        Route::patch('profile', 'UserController@update')->name('user.update');
+        Route::delete('profile', 'UserController@destroy')->name('user.destroy');
+
+        Route::group([
+            'prefix' => 'admin',
+            'namespace' => 'Admin',
+            'as' => 'admin.',
+        ], function () {
+            Route::resource('user', 'UserController');
+        });
+    });
+});
+
+Route::get('/', function () {
+    return redirect()->route('welcome', app()->getLocale());
 });

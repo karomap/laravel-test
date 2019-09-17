@@ -18,11 +18,11 @@ class GeneralTest extends TestCase
      */
     public function testWelcomePage()
     {
-        $this->get('/')
-            ->assertStatus(200)
+        $this->get(route('welcome', app()->getLocale()))
+            ->assertOk()
             ->assertSee(\Config::get('app.name'))
-            ->assertSee('Login')
-            ->assertSee('Register');
+            ->assertSee(__('Login'))
+            ->assertSee(__('Register'));
     }
 
     /**
@@ -33,16 +33,16 @@ class GeneralTest extends TestCase
      */
     public function testHomePage()
     {
-        $this->get('/home')
-            ->assertRedirect('/login');
+        $this->get(route('home', app()->getLocale()))
+            ->assertRedirect(route('login', app()->getLocale()));
 
         $user = User::firstOrCreate(
             factory(User::class)->make()->getAttributes()
         );
 
         $this->actingAs($user)
-            ->get('/home')
-            ->assertStatus(200)
+            ->get(route('home', app()->getLocale()))
+            ->assertOk()
             ->assertSee('You are logged in!');
     }
 
@@ -56,16 +56,16 @@ class GeneralTest extends TestCase
     {
         $user = factory(User::class)->make();
         User::whereEmail($user->email)->forceDelete();
-        $user->password = \Hash::make('secret');
+        $user->password = \Hash::make('password');
         $user->save();
 
         $formData = [
             'email' => $user->email,
-            'password' => 'secret'
+            'password' => 'password'
         ];
 
-        $this->post('/login', $formData)
-            ->assertRedirect('/home');
+        $this->post(route('login', app()->getLocale()), $formData)
+            ->assertRedirect(route('home', app()->getLocale()));
     }
 
     /**
@@ -82,11 +82,11 @@ class GeneralTest extends TestCase
         $formData = [
             'name' => $user->name,
             'email' => $user->email,
-            'password' => 'secret123',
-            'password_confirmation' => 'secret123'
+            'password' => 'password',
+            'password_confirmation' => 'password'
         ];
 
-        $this->post('/register', $formData)
-            ->assertRedirect('/home');
+        $this->post(route('register', app()->getLocale()), $formData)
+            ->assertRedirect(route('home', app()->getLocale()));
     }
 }

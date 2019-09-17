@@ -16,14 +16,9 @@ class HasAccessLevel
      */
     public function handle($request, Closure $next, $level = 'user')
     {
-        if (\Auth::guest()) {
-            return abort(401);
-        }
+        abort_if(\Auth::guest(), 401);
+        abort_unless($request->user()->hasAccessLevel($level), 403);
 
-        if ($request->user()->hasAccessLevel($level)) {
-            return $next($request);
-        }
-
-        return abort(403);
+        return $next($request);
     }
 }

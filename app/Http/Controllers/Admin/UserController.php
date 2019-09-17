@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     /**
+     * UserController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('has_access_level:admin');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

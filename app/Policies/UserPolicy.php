@@ -10,6 +10,11 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
+    protected function hasWriteAccess(User $user, User $model)
+    {
+        return $user->hasAccessLevel(UserRole::ADMIN) || $user->id === $model->id;
+    }
+
     /**
      * Determine whether the user can view any models.
      *
@@ -30,7 +35,7 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        //
+        return $this->hasWriteAccess($user, $model);
     }
 
     /**
@@ -41,7 +46,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasAccessLevel(UserRole::ADMIN);
     }
 
     /**
@@ -53,7 +58,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        //
+        return $this->hasWriteAccess($user, $model);
     }
 
     /**
@@ -65,7 +70,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        //
+        return $this->hasWriteAccess($user, $model);
     }
 
     /**
@@ -77,7 +82,7 @@ class UserPolicy
      */
     public function restore(User $user, User $model)
     {
-        //
+        return $this->hasWriteAccess($user, $model);
     }
 
     /**
@@ -89,6 +94,6 @@ class UserPolicy
      */
     public function forceDelete(User $user, User $model)
     {
-        //
+        return $this->hasWriteAccess($user, $model);
     }
 }

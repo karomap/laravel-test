@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Helpers\BaseEnum;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\ResetPassword as ResetPasswordNotification;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -64,5 +64,16 @@ class User extends Authenticatable
         }
 
         return $this->role === $level;
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 }

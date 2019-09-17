@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/karomap/laravel-test.svg?branch=master)](https://travis-ci.org/karomap/laravel-test)
+
+
 # Karomap Laravel Test
 
 Test for laravel developer
@@ -22,11 +25,25 @@ Test for laravel developer
 
 
 
+## Test Instruction
+
+- Fork this project
+- Run the [installation](#installation) steps
+- Run the tests
+  ```bash
+  $ ./vendor/bin/phpunit -v
+  ```
+- Some tests will not pass, fix the bugs and make the application passes all tests
+- Create pull request to this repository
+- Good Luck
+
+
+
 ## Installation
 
 - Clone this repository and change working directory to this project
   ```bash
-  $ git clone https://github.com/karomap/laravel-test karomap-laravel-test
+  $ git clone https://github.com/<your-github-user-name>/laravel-test karomap-laravel-test
 
   $ cd karomap-laravel-test
   ```
@@ -71,19 +88,6 @@ Test for laravel developer
   ```bash
   $ php artisan serve
   ```
-
-
-
-## Test Instruction
-
-- Fork this project
-- Run the installation steps
-- Run the tests
-  ```bash
-  $ ./vendor/bin/phpunit -v
-  ```
-- Some tests will not pass, fix the bugs and make the application passes all tests
-- Good Luck
 
 
 ---
