@@ -9,7 +9,7 @@ Test for laravel developer
 
 ## Requirements
 
-- PHP >= 7.2 with the following extensions enabled:
+- [PHP](https://www.php.net/) >= 7.2 with the following extensions enabled:
   - bcmath
   - ctype
   - json
@@ -21,21 +21,24 @@ Test for laravel developer
   - tokenizer
   - xml
 - [Composer](https://getcomposer.org/)
-- [Node.js](https://nodejs.org/en/)
+- [Node.js](https://nodejs.org/en/) *(optional)*
+
+> ***Note:***  
+> Node.js is required for compiling assets using [Laravel Mix](https://laravel.com/docs/master/mix)
 
 
 
 ## Test Instruction
 
 - Fork this project
-- Run the [installation](#installation) steps
+- Run the [**installation**](#installation) steps
 - Run the tests
   ```bash
   $ ./vendor/bin/phpunit -v
   ```
 - Some tests will not pass, fix the bugs and make the application passes all tests
 - Create pull request to this repository
-- Good Luck
+- Good Luck!
 
 
 
@@ -48,30 +51,26 @@ Test for laravel developer
   $ cd karomap-laravel-test
   ```
 
+  > ***Note:***  
   > Change the repository URL to your forked version of this project
-
-- Install PHP dependencies
-  ```bash
-  $ composer install
-  ```
-
-- Install Node.js modules for compiling assets (Laravel Mix)
-  ```bash
-  $ npm install
-  ```
 
 - Copy `.env.local` to `.env`
   ```bash
   $ cp .env.local .env
   ```
   
-- Create database file
+- Create sqlite database file
   ```bash
   # Application database
   $ touch database/database.sqlite
 
   # Testing database
   $ touch database/database-testing.sqlite
+  ```
+
+- Install PHP dependencies
+  ```bash
+  $ composer install
   ```
   
 - Generate new application key

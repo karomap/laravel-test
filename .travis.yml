@@ -7,7 +7,8 @@ notifications:
   email: false
 
 install:
-  - cp .env.testing .env
+  - cp .env.local .env
+  - touch database/database.sqlite
   - touch database/database-testing.sqlite
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
   - php artisan key:generate
