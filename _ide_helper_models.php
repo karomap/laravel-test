@@ -37,7 +37,7 @@ namespace App {
      * @method   static                                                                                                    \Illuminate\Database\Eloquent\Builder|\App\User whereRole($value)
      * @method   static                                                                                                    \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
      */
-    class _ide_helper_models extends \Eloquent
+    class User extends \Eloquent
     {
     }
 }
