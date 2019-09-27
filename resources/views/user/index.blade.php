@@ -44,14 +44,16 @@
                                         <div class="d-flex">
                                             <a href="{{ route('admin.user.edit', ['user' => $user, 'locale' => app()->getLocale()]) }}"
                                                 class="btn btn-sm btn-primary mr-2">{{ __('Edit') }}</a>
+                                            @if ($user != Auth::user())
                                             <form method="POST"
                                                 action="{{ route('admin.user.destroy', ['user' => $user, 'locale' => app()->getLocale()]) }}"
-                                                class="" onsubmit="return confirm('{{ __('Are you sure?') }}');">
+                                                onsubmit="return confirm('{{ __('Are you sure?') }}');">
                                                 @csrf
                                                 {{ method_field('DELETE') }}
                                                 <button type="submit"
                                                     class="btn btn-sm btn-danger">{{ __('Delete') }}</button>
                                             </form>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>

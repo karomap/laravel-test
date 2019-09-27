@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\UserRole;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 
 class UserController extends Controller
 {
@@ -59,7 +61,7 @@ class UserController extends Controller
             'role' => $request->role,
         ]);
 
-        session()->flash('status', \Lang::get('User :name has been created.', ['name' => $user->name]));
+        session()->flash('status', Lang::get('User :name has been created.', ['name' => $user->name]));
 
         return redirect()->route('admin.user.index', app()->getLocale());
     }
@@ -74,7 +76,7 @@ class UserController extends Controller
     public function edit($locale, User $user)
     {
         return view('user.edit', [
-            'title' => \Lang::get('Edit User'),
+            'title' => Lang::get('Edit User'),
             'action' => route('admin.user.update', [$locale, $user]),
             'user' => $user,
         ]);
@@ -104,7 +106,7 @@ class UserController extends Controller
         }
 
         $user->update($attributes);
-        session()->flash('status', \Lang::get('User :name has been updated.', ['name' => $user->name]));
+        session()->flash('status', Lang::get('User :name has been updated.', ['name' => $user->name]));
 
         return redirect()->route('admin.user.index', $locale);
     }
@@ -118,8 +120,15 @@ class UserController extends Controller
      */
     public function destroy($locale, User $user)
     {
+        /** @var \App\User $currentUser */
+        $currentUser = Auth::user();
+
+        if ($currentUser == $user) {
+            return back()->withErrors(Lang::get('Could not delete current user.'));
+        }
+
         $user->forceDelete();
-        session()->flash('status', \Lang::get('User :name has been deleted.', ['name' => $user->name]));
+        session()->flash('status', Lang::get('User :name has been deleted.', ['name' => $user->name]));
 
         return redirect()->route('admin.user.index', $locale);
     }
